@@ -1,0 +1,75 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">x86</Platform>
+    <ProductVersion>3.10</ProductVersion>
+    <ProjectGuid>d70f4fd0-4580-435f-a3c3-0b6315a0bf27</ProjectGuid>
+    <SchemaVersion>2.0</SchemaVersion>
+    <OutputName>OrbitSlackBotServiceSetup</OutputName>
+    <OutputType>Package</OutputType>
+    <WixTargetsPath Condition=" '$(WixTargetsPath)' == '' AND '$(MSBuildExtensionsPath32)' != '' ">$(MSBuildExtensionsPath32)\Microsoft\WiX\v3.x\Wix.targets</WixTargetsPath>
+    <WixTargetsPath Condition=" '$(WixTargetsPath)' == '' ">$(MSBuildExtensionsPath)\Microsoft\WiX\v3.x\Wix.targets</WixTargetsPath>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|x86' ">
+    <OutputPath>bin\$(Configuration)\</OutputPath>
+    <IntermediateOutputPath>obj\$(Configuration)\</IntermediateOutputPath>
+    <DefineConstants>Debug</DefineConstants>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|x86' ">
+    <OutputPath>bin\$(Configuration)\</OutputPath>
+    <IntermediateOutputPath>obj\$(Configuration)\</IntermediateOutputPath>
+    <DefineConstants>ProgramFilesSource=$(SolutionDir)Apteco.OrbitSlackBot.Service\bin\Release\InstallerSources\ProgramFiles</DefineConstants>
+  </PropertyGroup>
+  <ItemGroup>
+    <Compile Include="Fragments\CustomUI.wxs" />
+    <Compile Include="Fragments\ProgramFilesFragment.wxs" />
+    <Compile Include="Product.wxs" />
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="Fragments" />
+    <Folder Include="Localisation" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Localisation\de-DE.wxl" />
+    <EmbeddedResource Include="Localisation\en-US.wxl" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\Apteco.OrbitSlackBot.Service\Apteco.OrbitSlackBot.Service.csproj">
+      <Name>Apteco.OrbitSlackBot.Service</Name>
+      <Project>{E59757EF-86DE-4BC7-8069-6A75E34393DE}</Project>
+      <Private>True</Private>
+      <DoNotHarvest>True</DoNotHarvest>
+      <RefProjectOutputGroups>Binaries;Content;Satellites</RefProjectOutputGroups>
+      <RefTargetDir>INSTALLFOLDER</RefTargetDir>
+    </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <WixExtension Include="WixUIExtension">
+      <HintPath>$(WixExtDir)\WixUIExtension.dll</HintPath>
+      <Name>WixUIExtension</Name>
+    </WixExtension>
+    <WixExtension Include="WixNetFxExtension">
+      <HintPath>$(WixExtDir)\WixNetFxExtension.dll</HintPath>
+      <Name>WixNetFxExtension</Name>
+    </WixExtension>
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Fragments\SetSpecificProgramFilesOptions.xslt" />
+  </ItemGroup>
+  <Import Project="$(WixTargetsPath)" />
+  <PropertyGroup>
+    <PreBuildEvent>"$(WIX)bin\heat.exe" dir "$(SolutionDir)Apteco.OrbitSlackBot.Service\bin\Release\InstallerSources\ProgramFiles" -t "$(ProjectDir)Fragments\SetSpecificProgramFilesOptions.xslt" -cg ProgramFiles -gg -scom -sreg -sfrag -srd -dr INSTALLLOCATION -var var.ProgramFilesSource -out "$(ProjectDir)Fragments\ProgramFilesFragment.wxs"</PreBuildEvent>
+  </PropertyGroup>
+  <PropertyGroup>
+    <PostBuildEvent />
+  </PropertyGroup>
+  <!--
+	To modify your build process, add your task inside one of the targets below and uncomment it.
+	Other similar extension points exist, see Wix.targets.
+	<Target Name="BeforeBuild">
+	</Target>
+	<Target Name="AfterBuild">
+	</Target>
+	-->
+</Project>

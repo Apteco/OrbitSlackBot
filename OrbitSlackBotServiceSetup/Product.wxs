@@ -1,0 +1,53 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<Wix xmlns="http://schemas.microsoft.com/wix/2006/wi">
+	<Product Id="*" Name="Apteco Orbit Slack Bot" Language="1033" Version="1.0.0" Manufacturer="Apteco" UpgradeCode="8CA69DB3-5E64-47FE-938B-22647262C369">
+    <Package InstallerVersion="300" Compressed="yes" InstallScope="perMachine" Manufacturer="Apteco" Platform="x86" />
+
+    <Property Id="ARPHELPTELEPHONE" Value="(+44)1926 407595" />
+    <Property Id="ARPHELPLINK" Value="http://www.apteco.com" />
+    <Property Id="ARPURLINFOABOUT" Value="http://www.apteco.com" />
+    <Property Id="ARPCOMMENTS" Value="Apteco Orbit Slack Bot" />
+
+    <Icon Id="App.ico" SourceFile="$(var.ProgramFilesSource)\App.ico" />
+    <Property Id="ARPPRODUCTICON" Value="App.ico" />
+
+    <Property Id="REINSTALLMODE" Value="amus" />
+    <Property Id="PREVIOUSVERSIONSINSTALLED" Secure="yes" />
+    <Upgrade Id="8CA69DB3-5E64-47FE-938B-22647262C369">
+      <UpgradeVersion Minimum="1.0.0.0" Maximum="99.0.0.0" Property="PREVIOUSVERSIONSINSTALLED" IncludeMinimum="yes" IncludeMaximum="no" />
+    </Upgrade>
+
+    <InstallExecuteSequence>
+      <RemoveExistingProducts After="InstallInitialize" />
+      <InstallExecute After="RemoveExistingProducts" />
+    </InstallExecuteSequence>
+
+    <MediaTemplate EmbedCab="yes" />
+
+    <UIRef Id="WixUI_CustomInstallDir" />
+    <UIRef Id="WixUI_ErrorProgressText" />
+    <Property Id="WIXUI_INSTALLDIR" Value="INSTALLLOCATION" />
+    <WixVariable Id="WixUIBannerBmp" Value="$(var.ProgramFilesSource)\InstallerBanner.bmp" />
+    <WixVariable Id="WixUIDialogBmp" Value="$(var.ProgramFilesSource)\InstallerDialog.bmp" />
+
+    <!-- Require .Net 4.5 to Install -->
+    <PropertyRef Id="NETFRAMEWORK45" />
+    <Condition Message="This application requires .NET Framework 4.5. Please install the .NET Framework then run this installer again.">
+      <![CDATA[Installed OR NETFRAMEWORK45]]>
+    </Condition>
+
+    <Feature Id="ProductFeature" Title="Apteco Orbit Slack Bot" Level="1">
+      <ComponentGroupRef Id="ProgramFiles" />
+    </Feature>
+  </Product>
+
+  <Fragment>
+    <Directory Id="TARGETDIR" Name="SourceDir">
+      <Directory Id="ProgramFilesFolder">
+        <Directory Id="ProgramFilesApteco" Name="Apteco">
+          <Directory Id="INSTALLLOCATION" Name="Orbit Slack Bot" />
+        </Directory>
+      </Directory>
+    </Directory>
+  </Fragment>
+</Wix>
