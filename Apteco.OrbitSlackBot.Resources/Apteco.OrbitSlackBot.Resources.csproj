@@ -45,10 +45,17 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="Images\App.ico" />
+    <Content Include="Images\Readme\CreateASlackApp.png" />
+    <Content Include="Images\Readme\ExampleSlackBotConversation.png" />
+    <Content Include="Images\Readme\FindTheBotOAuthToken.png" />
     <Content Include="Images\InstallerBannerWix.bmp" />
     <Content Include="Images\InstallerDialogWix.bmp" />
     <Content Include="Images\logo-orbit-01-blue-icon-bigger.png" />
     <Content Include="Images\logo-orbit-01-blue-icon.svg" />
+    <Content Include="Images\Readme\SetSlackNameAndColour.png" />
+    <Content Include="Images\Readme\SlackBotConsoleRunning.png" />
+    <Content Include="Images\Readme\SlackBotExampleConfiguration.png" />
+    <Content Include="Images\Readme\SlackBotConsoleExampleParameters.png" />
   </ItemGroup>
   <ItemGroup>
     <None Include="BuildTools\CreateInstallerSources.bat" />
