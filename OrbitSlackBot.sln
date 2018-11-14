@@ -15,6 +15,12 @@ Project("{930C7802-8A8C-48F9-8165-68863BCCD9DD}") = "OrbitSlackBotServiceSetup",
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Apteco.OrbitSlackBot.Resources", "Apteco.OrbitSlackBot.Resources\Apteco.OrbitSlackBot.Resources.csproj", "{8DB22411-B50F-4FDB-853E-2188EF91614B}"
 EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{0293EB30-2D47-4577-868F-E99D9D964601}"
+	ProjectSection(SolutionItems) = preProject
+		LICENSE = LICENSE
+		README.md = README.md
+	EndProjectSection
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
